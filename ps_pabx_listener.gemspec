@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Command line utility which connects to a Panasonic PABX via telnet and retrieve calling information.}
   spec.description   = %q{A command line utility which connects to a Panasonic PABX via *telnet* and retrieve calling information. Filters valuable content while keeping the original fixed-space format.}
-  spec.homepage      = "http://vieira.io"
+  spec.homepage      = "http://github.com/pelgrim/ps_pabx_listener"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
@@ -23,6 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "rspec-mocks", "~> 3.0"
   spec.add_development_dependency "factory_girl", "~> 4.7"
-  spec.add_dependency "net-telnet"
-  spec.add_dependency "daemons"
+  spec.add_dependency "net-telnet", "0.1.1"
 end
