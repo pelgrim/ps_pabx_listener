@@ -21,6 +21,10 @@ Simply,
 
       ps_pabx -s <pabx ip address or hostname> -u <username> -p <password>
 
+* Listem for useful information for 10 seconds:
+
+      ps_pabx -s <pabx ip address or hostname> -u <username> -p <password> -t 10
+
 * Listem continuously for data:
 
       ps_pabx -s <pabx ip address or hostname> -u <username> -p <password> -d

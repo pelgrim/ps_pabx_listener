@@ -17,9 +17,13 @@ module PsPabxListener
     def get_data timeout, &block
       @listener.start
       start_time = Time.now
-      while (Time.now - start_time < timeout)
-        @listener.get.each {|data| yield data}
+      runner = Thread.new do
+        loop do
+          @listener.get.each {|data| yield data}
+        end
       end
+      sleep 1 while Time.now - start_time < timeout
+      runner.exit
       @listener.stop
     end
 

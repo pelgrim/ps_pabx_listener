@@ -48,7 +48,7 @@ module PsPabxListener
         "Host" => @host,
         "Port" => 2300,
         "Prompt" => /(\n|\r)/,
-        "Timeout" => @timeout,
+        "Timeout" => false,
         "Waittime" => @timeout
         })
     end

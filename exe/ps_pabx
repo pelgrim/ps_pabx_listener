@@ -4,19 +4,20 @@ require 'getoptlong'
 module PsPabxListener
   class Robot
     def initialize
+      @get_time = 30
       load_options
       load_arguments
       @main = PsPabxListener::Main.new(host: @host,
                               user: @user,
                               password: @password,
-                              timeout: 5)
+                              timeout: 1)
     end
 
     def run
       if @daemonize
         @main.each_data {|data| puts data}
       else
-        @main.get_data(30) {|data| puts data}
+        @main.get_data(@get_time) {|data| puts data}
       end
     end
 
@@ -27,6 +28,7 @@ module PsPabxListener
         ['--host', '-s', GetoptLong::REQUIRED_ARGUMENT],
         ['--user', '-u', GetoptLong::REQUIRED_ARGUMENT],
         ['--password', '-p', GetoptLong::REQUIRED_ARGUMENT],
+        ['--get-time', '-t', GetoptLong::OPTIONAL_ARGUMENT],
         ['--daemonize', '-d', GetoptLong::NO_ARGUMENT]
       )
     end
@@ -37,6 +39,7 @@ module PsPabxListener
             when '--host' then @host = arg
             when '--user' then @user = arg
             when '--password' then @password = arg
+            when '--get-time' then @get_time = arg.to_i
             when '--daemonize' then @daemonize = true
           end
         end
