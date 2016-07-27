@@ -15,7 +15,10 @@ module PsPabxListener
 
     def run
       if @daemonize
-        @main.each_data {|data| puts data}
+        @main.each_data do |data|
+          puts data
+          store_data(data, generate_filename)
+        end
       else
         @main.get_data(@get_time) {|data| puts data}
       end
@@ -29,21 +32,34 @@ module PsPabxListener
         ['--user', '-u', GetoptLong::REQUIRED_ARGUMENT],
         ['--password', '-p', GetoptLong::REQUIRED_ARGUMENT],
         ['--get-time', '-t', GetoptLong::OPTIONAL_ARGUMENT],
-        ['--daemonize', '-d', GetoptLong::NO_ARGUMENT]
+        ['--daemonize', '-d', GetoptLong::OPTIONAL_ARGUMENT]
       )
     end
 
     def load_arguments
-        @args.each do |opt, arg|
-          case opt
-            when '--host' then @host = arg
-            when '--user' then @user = arg
-            when '--password' then @password = arg
-            when '--get-time' then @get_time = arg.to_i
-            when '--daemonize' then @daemonize = true
-          end
+      @args.each do |opt, arg|
+        case opt
+          when '--host' then @host = arg
+          when '--user' then @user = arg
+          when '--password' then @password = arg
+          when '--get-time' then @get_time = arg.to_i
+          when '--daemonize'
+            @daemonize = true
+            @store_dir = arg
         end
       end
+    end
+
+    def store_data data, filename
+      File.open(File.join(@store_dir,filename), 'a') do |f|
+        f.puts data
+      end
+    end
+
+    def generate_filename
+      Time.now.strftime("%Y%m%d") + (Time.now.hour / 12).to_s + ".txt"
+    end
+
   end
 end
 

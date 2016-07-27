@@ -35,16 +35,13 @@ module PsPabxListener
       Signal.trap("INT") {@run = false}
 
       runner = Thread.new do
-        begin
-          @listener.get.each {|line| yield line}
-        rescue Exception => e
-          @listener.stop
+        loop do
+          @listener.get.each {|data| yield data}
         end
       end
 
       sleep 1 while(@run)
       runner.exit
-      
       @listener.stop
     end
 

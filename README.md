@@ -25,9 +25,9 @@ Simply,
 
       ps_pabx -s <pabx ip address or hostname> -u <username> -p <password> -t 10
 
-* Listem continuously for data:
+* Listem continuously for data and store it in a given directory:
 
-      ps_pabx -s <pabx ip address or hostname> -u <username> -p <password> -d
+      ps_pabx -s <pabx ip address or hostname> -u <username> -p <password> -d <store directory>
 
 ## Using as a daemon
 

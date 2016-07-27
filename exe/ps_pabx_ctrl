@@ -15,6 +15,7 @@ module PsPabxListener
 
     def run
       @ps_pabx_listener.each_data {|data| store_data(data, generate_filename)}
+      # @ps_pabx_listener.each_data {|data| puts data}
     end
 
     def store_data data, filename
