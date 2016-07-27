@@ -37,7 +37,6 @@ module PsPabxListener
     private
 
     def validate_attributes
-      puts @host.class
       raise 'Invalid host' unless @host.is_a? String
       raise 'Invalid user' unless @user.is_a? String
       raise 'Invalid password' unless @password.is_a? String
