@@ -12,6 +12,8 @@ def prepare_telnet timeout=false
     and_return("Trash\n")
   allow(telnet).to receive(:cmd).
     with('foo').and_return("10/10/10 not trash\n")
+  allow(telnet).to receive(:waitfor).
+    with({"Match" => /(\n|\r)/}).and_return("11/11/11 not trash\n")
   allow(Net::Telnet).to receive(:new).with(
     'Host' => 'localhost',
     'Port' => 2300,
