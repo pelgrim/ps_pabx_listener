@@ -19,15 +19,15 @@ Simply,
 
 * Listem for useful information for 30 seconds:
 
-      ps_pabx -s <pabx ip address or hostname> -u <username> -p <password>
+        ps_pabx -s pabx.example.com -u username -p password
 
 * Listem for useful information for 10 seconds:
 
-      ps_pabx -s <pabx ip address or hostname> -u <username> -p <password> -t 10
+        ps_pabx -s pabx.example.com -u username -p password -t 10
 
 * Listem continuously for data and store it in a given directory:
 
-      ps_pabx -s <pabx ip address or hostname> -u <username> -p <password> -d <store directory>
+        ps_pabx -s pabx.example.com -u username -p password -d /output/directory
 
 ## What else?
 Developed by Lucas Vieira <lucas@vieira.io>, June 2016.
