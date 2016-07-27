@@ -2,10 +2,6 @@ require 'spec_helper'
 
 describe PsPabxListener::Listener do
 
-  before(:all) do
-    @telnet = double("telnet")
-  end
-
   it 'requires a host' do
     expect {PsPabxListener::Listener.new(nil,'john','foo')}.to raise_error("Invalid host")
   end
