@@ -1,0 +1,48 @@
+require 'ps_pabx_listener'
+require 'getoptlong'
+
+module PsPabxListener
+  class Robot
+    def initialize
+      load_options
+      load_arguments
+      @main = PsPabxListener::Main.new(host: @host,
+                              user: @user,
+                              password: @password,
+                              timeout: 5)
+    end
+
+    def run
+      if @daemonize
+        @main.each_data {|data| puts data}
+      else
+        @main.get_data(30) {|data| puts data}
+      end
+    end
+
+    private
+
+    def load_options
+      @args = GetoptLong.new(
+        ['--host', '-s', GetoptLong::REQUIRED_ARGUMENT],
+        ['--user', '-u', GetoptLong::REQUIRED_ARGUMENT],
+        ['--password', '-p', GetoptLong::REQUIRED_ARGUMENT],
+        ['--daemonize', '-d', GetoptLong::NO_ARGUMENT]
+      )
+    end
+
+    def load_arguments
+        @args.each do |opt, arg|
+          case opt
+            when '--host' then @host = arg
+            when '--user' then @user = arg
+            when '--password' then @password = arg
+            when '--daemonize' then @daemonize = true
+          end
+        end
+      end
+  end
+end
+
+robot = PsPabxListener::Robot.new
+robot.run
