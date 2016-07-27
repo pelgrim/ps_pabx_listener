@@ -29,24 +29,6 @@ Simply,
 
       ps_pabx -s <pabx ip address or hostname> -u <username> -p <password> -d <store directory>
 
-## Using as a daemon
-
-You may prefer to use <code>ps_pabx_ctrl</code> and run ps_pabx as a daemon. In order to do that, make sure the following environment variables are defined and visible:
-
-* **PS_PABX_HOST**: the PABX ip address or hostname;
-* **PS_PABX_USER**: the PABX *telnet* username;
-* **PS_PABX_PASS**: the PABX *telnet* password;
-* **PS_PABX_DATA**: the directory where useful information, such as logging and collected data, will be stored.
-
-Once it's done, you use the daemon with common service commands such as:
-
-      ps_pabx_ctrl start
-      ps_pabx_ctrl status
-      ps_pabx_ctrl restart
-      ps_pabx_ctrl stop
-
-And so on.
-
 ## What else?
 Developed by Lucas Vieira <lucas@vieira.io>, June 2016.
 
