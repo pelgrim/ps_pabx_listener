@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "rspec-mocks", "~> 3.0"
   spec.add_development_dependency "factory_girl", "~> 4.7"
+  spec.add_dependency "net-telnet"
 end
