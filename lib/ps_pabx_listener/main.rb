@@ -34,7 +34,7 @@ module PsPabxListener
 
       Signal.trap("INT") {@run = false}
 
-      while(@run) do
+      runner = Thread.new do
         begin
           @listener.get.each {|line| yield line}
         rescue Exception => e
@@ -42,6 +42,9 @@ module PsPabxListener
         end
       end
 
+      sleep 1 while(@run)
+      runner.exit
+      
       @listener.stop
     end
 
