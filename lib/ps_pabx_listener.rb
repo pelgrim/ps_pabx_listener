@@ -1,5 +1,4 @@
+require "net/telnet"
 require "ps_pabx_listener/version"
-
-module PsPabxListener
-  # Your code goes here...
-end
+require "ps_pabx_listener/listener"
+# require "ps_pabx_listener/main"
