@@ -1,36 +1,51 @@
 # PsPabxListener
+A command line utility which connects to a Panasonic PABX via *telnet* and retrieve calling information. It doesn't parse the responses to any popular format. Instead, it just filters valuable content while keeping the original fixed-space format. Parsing to formats such as *csv*, as well as further instructions regarding Panasonic's default format, shall be included in the future. And a list of working devices, off course.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ps_pabx_listener`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Tested Devices:
+* Panasonic KX-TDA 200.
 
-TODO: Delete this and the text above, and describe your gem
+## Environment:
+* Ubuntu Linux (trusty or newer);
+* Ruby 2.2.0.
 
-## Installation
+It's possible that the utility works on different environments, but since I haven't tested it on such conditions, I can't promise anything. If you do, please let me know, and I will include both the information and your name as a contributor.
 
-Add this line to your application's Gemfile:
+## Install
+Simply,
 
-```ruby
-gem 'ps_pabx_listener'
-```
+      gem install ps_pabx_listener
 
-And then execute:
+## Using the command line utility
 
-    $ bundle
+* Listem for useful information for 30 seconds:
 
-Or install it yourself as:
+      ps_pabx -s <pabx ip address or hostname> -u <username> -p <password>
 
-    $ gem install ps_pabx_listener
+* Listem continuously for data:
 
-## Usage
+      ps_pabx -s <pabx ip address or hostname> -u <username> -p <password> -d
 
-TODO: Write usage instructions here
+## Using as a daemon
 
-## Development
+You may prefer to use <code>ps_pabx_ctrl</code> and run ps_pabx as a daemon. In order to do that, make sure the following environment variables are defined and visible:
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+* **PS_PABX_HOST**: the PABX ip address or hostname;
+* **PS_PABX_USER**: the PABX *telnet* username;
+* **PS_PABX_PASS**: the PABX *telnet* password;
+* **PS_PABX_DATA**: the directory where useful information, such as logging and collected data, will be stored.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Once it's done, you use the daemon with common service commands such as:
 
-## Contributing
+      ps_pabx_ctrl start
+      ps_pabx_ctrl status
+      ps_pabx_ctrl restart
+      ps_pabx_ctrl stop
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ps_pabx_listener.
+And so on.
 
+## What else?
+Developed by Lucas Vieira <lucas@vieira.io>, June 2016.
+
+If you noticed a problem whatsoever, please, let me know.
+
+Also, accepting PRs for better spec tests and anything else, really.
